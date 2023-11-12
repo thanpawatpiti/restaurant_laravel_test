@@ -14,6 +14,13 @@ class RestaurantLaravelTestController extends Controller
         // keyword to search
         $keyword = $request->input('query');
 
+        if ($keyword == '') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Keyword is required',
+            ]);
+        }
+
         // reset cache data
         // cache()->forget('googlemaps_' . md5($keyword));
 
@@ -37,6 +44,8 @@ class RestaurantLaravelTestController extends Controller
             } else {
                 $response = [];
             }
+
+            cache()->put($cacheKey, $response, now()->addMinutes(60));
         }
 
         return response()->json([
