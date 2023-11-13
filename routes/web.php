@@ -17,6 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// For the restaurant-laravel-test page
-Route::get('/restaurant-laravel-test', [RestaurantLaravelTestController::class, 'index']);
